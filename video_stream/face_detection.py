@@ -9,7 +9,7 @@ import cvlib as cv
 model = load_model('C:/Users/TEJPAL KUMAWAT/Downloads/gender_detection.model')
 #model1=load_model('C:/Users/TEJPAL KUMAWAT/google drive api/age_detect_cnn_model.h5')
 #model=load_model('gender_detection.model')
-#model1=load_model('age_detect_cnn_model.h5')
+model1=load_model('age_detect_cnn_model.h5')
 model2=load_model('age_detection.h5')
 MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
 age_ranges = ['1-2', '3-9', '10-20', '21-27', '28-45', '46-65', '66-116']
@@ -51,11 +51,11 @@ while webcam.isOpened():
         face_crop = img_to_array(face_crop)
         face_crop = np.expand_dims(face_crop, axis=0)
         conf = model.predict(face_crop)[0]
-        x=model2.predict(face_crop)[0][0]
-        # model.predict return a 2D matrix, ex: [[9.9993384e-01 7.4850512e-05]]
-       # face_roi = cv2.resize(face_detect, (200, 200))
-       # face_roi = face_roi.reshape(-1, 200, 200, 1)
-        #face_age = age_ranges[np.argmax(model1.predict(face_roi))]
+        
+        #model.predict return a 2D matrix, ex: [[9.9993384e-01 7.4850512e-05]]
+        face_roi = cv2.resize(face_detect, (200, 200))
+        face_roi = face_roi.reshape(-1, 200, 200, 1)
+        face_age = age_ranges[np.argmax(model1.predict(face_roi))]
        # face_age_pct = f"({round(np.max(model1.predict(face_roi)) * 100, 2)}%)"
         # get label with max accuracy
        # idx = np.argmax(conf)
